@@ -33,7 +33,7 @@
         <li><a href="index.php?page=sec_register"><i class="fas fa-user-plus"></i>&nbsp;Crear Cuenta</a></li>
         <li><a href="index.php?page=NW202202_FirstForm"><i class="fas fa-sign-in-alt"></i>&nbsp;Primer Form</a></li>
         <li><a href="index.php?page=Mnt_Productos"><i class="fas fa-sign-in-alt"></i>&nbsp;Productos</a></li>
-        <li><a href="index.php?page=Mnt_Productos"><i class="fas fa-sign-in-alt"></i>&nbsp;Pianos</a></li>
+        <li><a href="index.php?page=Mnt_Pianos"><i class="fas fa-sign-in-alt"></i>&nbsp;Pianos</a></li>
       </ul>
     </nav>
   </header>
