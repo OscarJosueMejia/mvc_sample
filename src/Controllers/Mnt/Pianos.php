@@ -41,7 +41,6 @@ class Pianos extends PublicController
     {
         $viewData = array();
         $viewData["Pianos"] = DaoPianos::getAll();
-        error_log(json_encode($viewData));
       
         Renderer::render('mnt/pianos', $viewData);
     }

@@ -1,7 +1,7 @@
 <?php
 /**
  * PHP Version 7
- * Modelo de Datos para modelo
+ * Modelo de Datos para tabla 'Pianos'
  *
  * @category Data_Model
  * @package  Models${1:modelo}
@@ -9,29 +9,16 @@
  * @student  Oscar Josué Mejía Serén
  * @license  Comercial http://
  *
- * @version 1.0.0
  *
  * @link http://url.com
  */
 
 namespace Dao\Mnt;
-
 use Dao\Table;
 
-/**
- * Modelo de Datos para la tabla de Pianos
- *
- * @category Data_Model
- * @package  Dao.Table
- * @author   Orlando J Betancourth <orlando.betancourth@gmail.com>
- * @student  Oscar Josué Mejía Serén
- * @license  Comercial http://
- *
- * @link http://url.com
- */
+
 class Pianos extends Table
 {
-
     /**
      * Obtiene todos los registros de Pianos
      *
