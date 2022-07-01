@@ -1,4 +1,4 @@
-<h1>This is my first form</h1>
+<h1 class="center">This is my first form</h1>
 <form action="index.php?page=NW202202_FirstForm" method="post" class="row offset-3 col-6">
     <fieldset class="row">
         <label class="col-4" for="nombre">Nombre:</label>

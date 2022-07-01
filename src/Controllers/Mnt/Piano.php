@@ -153,8 +153,7 @@ class Piano extends PublicController
                 = "El precio de venta es requerido.";
             $hasErrors = true;
         }
-        error_log(json_encode($this->viewData));
-        
+
 
         if (!$hasErrors) {
             $result = null;

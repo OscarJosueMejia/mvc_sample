@@ -27,6 +27,7 @@ class Pianos extends Table
     public static function getAll()
     {
         $sqlstr = "Select * from pianos;";
+        
         return self::obtenerRegistros($sqlstr, array());
     }
     /**

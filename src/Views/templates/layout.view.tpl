@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/{{BASE_DIR}}/public/css/appstyle.css" />
+  <link rel="stylesheet" href="/{{BASE_DIR}}/public/css/cards.css" />
   <script src="https://kit.fontawesome.com/{{FONT_AWESOME_KIT}}.js" crossorigin="anonymous"></script>
   {{foreach SiteLinks}}
   <link rel="stylesheet" href="/{{~BASE_DIR}}/{{this}}" />
@@ -34,6 +35,7 @@
         <li><a href="index.php?page=NW202202_FirstForm"><i class="fas fa-sign-in-alt"></i>&nbsp;Primer Form</a></li>
         <li><a href="index.php?page=Mnt_Productos"><i class="fas fa-sign-in-alt"></i>&nbsp;Productos</a></li>
         <li><a href="index.php?page=Mnt_Pianos"><i class="fas fa-sign-in-alt"></i>&nbsp;Pianos</a></li>
+        <li><a href="index.php?page=Mnt_Catalogo"><i class="fas fa-user-plus"></i>&nbsp;Catálogo</a></li>
       </ul>
     </nav>
   </header>

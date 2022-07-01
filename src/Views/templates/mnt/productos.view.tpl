@@ -10,6 +10,7 @@
                 <th>Nombre</th>
                 <th>Tipo</th>
                 <th>Estado</th>
+                <th>Precio</th>
                 <th>Vendible</th>
                 <th><a href="index.php?page=Mnt-Producto&mode=INS">Nuevo</a></th>
             </tr>
@@ -21,6 +22,7 @@
                 <td> <a href="index.php?page=Mnt-Producto&mode=DSP&id={{invPrdId}}">{{invPrdDsc}}</a></td>
                 <td>{{invPrdTip}}</td>
                 <td>{{invPrdEst}}</td>
+                <td>{{invPrdPrice}}</td>
                 <td>{{invPrdVnd}}</td>
                 <td>
                     <a href="index.php?page=Mnt-Producto&mode=UPD&id={{invPrdId}}">Editar</a>
