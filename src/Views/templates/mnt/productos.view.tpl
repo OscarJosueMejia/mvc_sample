@@ -1,8 +1,9 @@
-<h1>Trabajar con Productos</h1>
+<h1 class="center">Trabajar con Productos</h1>
 <section>
 
 </section>
-<section>
+<section class="row flex-center"
+    style="background-color:#f4f4f4;margin-top: 1rem;border-radius:1rem; padding-top:1rem; padding-bottom:1rem;">
     <table>
         <thead>
             <tr>
