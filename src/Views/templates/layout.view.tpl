@@ -36,6 +36,7 @@
         <li><a href="index.php?page=Mnt_Productos"><i class="fas fa-sign-in-alt"></i>&nbsp;Productos</a></li>
         <li><a href="index.php?page=Mnt_Pianos"><i class="fas fa-sign-in-alt"></i>&nbsp;Pianos</a></li>
         <li><a href="index.php?page=Mnt_Catalogo"><i class="fas fa-user-plus"></i>&nbsp;Catálogo</a></li>
+        <li><a href="index.php?page=Mnt_Roles"><i class="fas fa-user-plus"></i>&nbsp;Roles</a></li>
       </ul>
     </nav>
   </header>
