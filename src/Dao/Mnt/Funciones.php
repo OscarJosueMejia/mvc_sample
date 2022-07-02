@@ -1,7 +1,4 @@
 <?php 
-/**
- * @author: Oscar Mejia
- */
 
 namespace Dao\Mnt;
 use Dao\Table;
@@ -9,7 +6,7 @@ use Dao\Table;
 class Funciones extends Table {
 
     public static function getAll(){
-        $sqlstr = "select * from funciones;";  
+        $sqlstr = "select * from `funciones`;";  
         return self::obtenerRegistros($sqlstr, array());
     }
 
@@ -20,11 +17,17 @@ class Funciones extends Table {
         return self::obtenerUnRegistro($sqlstr, $sqlParams);
     }
 
-    public static function insert($fndsc,$fnest,$fntyp,){
-        $sqlstr = "INSERT INTO `funciones` (`fndsc`,`fnest`,`fntyp`)
-        VALUES(:fndsc,:fnest,:fntyp);";
+    public static function insert(
+        $fncod,
+        $fndsc,
+        $fnest,
+        $fntyp,
+    ){
+        $sqlstr = "INSERT INTO `funciones` (`fncod`,`fndsc`,`fnest`,`fntyp`)
+        VALUES(:fncod,:fndsc,:fnest,:fntyp);";
         
         $sqlParams =[
+        "fncod" => $fncod,
         "fndsc" => $fndsc,
         "fnest" => $fnest,
         "fntyp" => $fntyp,
@@ -33,9 +36,12 @@ class Funciones extends Table {
         return self::executeNonQuery($sqlstr, $sqlParams);
     }
 
-
-    public static function update($fndsc,$fnest,$fntyp,$fncod){
-
+    public static function update(
+        $fndsc,
+        $fnest,
+        $fntyp,
+        $fncod 
+    ){
         $sqlstr = "UPDATE `funciones` SET
         `fndsc` = :fndsc, `fnest` = :fnest, `fntyp` = :fntyp
         where `fncod`=:fncod;";
@@ -59,5 +65,5 @@ class Funciones extends Table {
         ];
 
         return self::executeNonQuery($sqlstr, $sqlParams);
-        }
+    }
 }

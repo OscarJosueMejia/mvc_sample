@@ -8,6 +8,15 @@
         <input type="hidden" name="rolescod" value="{{rolescod}}" />
 
         <fieldset class="row" style="border-color:transparent;">
+            <label class="col-4" for="rolescod">Código</label>
+            <input class="col-8" type="text" id="rolescod" name="rolescod" placeholder="Código" value="{{rolescod}}"
+                {{if readonly}} readonly {{endif readonly}} style="border-radius: 0.4rem; border:none;" />
+            {{if error_rolescod}} {{foreach error_rolescod}} <div class="error">{{this}}</div>
+            {{endfor error_rolescod}}
+            {{endif error_rolescod}}
+        </fieldset>
+
+        <fieldset class="row" style="border-color:transparent;">
             <label class="col-4" for="rolesdsc">Descripción del Rol</label>
             <input class="col-8" type="text" id="rolesdsc" name="rolesdsc" placeholder="Descripción"
                 value="{{rolesdsc}}" {{if readonly}} readonly {{endif readonly}}

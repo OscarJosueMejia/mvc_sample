@@ -69,7 +69,7 @@ class Roles extends Table {
         try {
             return self::executeNonQuery($sqlstr, $sqlParams);
         } catch (\Throwable $th) {
-            echo "<h2 style='color:red;'>ERROR: No se puede eliminar este registro.</h2>\n".$th;
+            echo "<h2 style='color:red;'>ERROR: No se puede eliminar este registro.</h2>"."\n"."$th";
             die;
         }
     }

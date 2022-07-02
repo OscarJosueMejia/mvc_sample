@@ -44,6 +44,7 @@ class Rol extends PublicController{
 
         //Var set guided by Table Info
         $this->viewData["rolescod"] = "";
+        $this->viewData["error_rolescod"] = array();
         $this->viewData["rolesdsc"] = "";
         $this->viewData["error_rolesdsc"] = array();
         $this->viewData["rolesest"] = "";
@@ -102,6 +103,12 @@ class Rol extends PublicController{
         }
 
         //Validation Zone
+        if (Validators::IsEmpty($this->viewData["rolescod"])) {
+            $this->viewData["error_rolescod"][]
+                = "Este campo es requerido.";
+            $hasErrors = true;
+        } 
+        
         if (Validators::IsEmpty($this->viewData["rolesdsc"])) {
             $this->viewData["error_rolesdsc"][]
                 = "Este campo es requerido.";

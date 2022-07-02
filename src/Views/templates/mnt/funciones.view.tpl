@@ -1,5 +1,4 @@
-
-<h1>Trabajar con Funciones</h1>
+<h1 class="center">Trabajar con Funciones</h1>
 <section>
 
 </section>
@@ -8,11 +7,10 @@
     <table>
         <thead>
             <tr>
-        <th>fncod</th>
-<th>fndsc</th>
-<th>fnest</th>
-<th>fntyp</th>
-
+                <th>Código</th>
+                <th>Descripción</th>
+                <th>Estado</th>
+                <th>Tipo</th>
                 <th><a href="index.php?page=mnt_funcion&mode=INS">Nuevo</a></th>
             </tr>
         </thead>
@@ -20,9 +18,9 @@
             {{foreach Funciones}}
             <tr>
                 <td>{{fncod}}</td>
-<td><a href="index.php?page=mnt_funcion&mode=DSP&id={{fncod}}">{{fndsc}}</td>
-<td>{{fnest}}</td>
-<td>{{fntyp}}</td>
+                <td><a href="index.php?page=mnt_funcion&mode=DSP&id={{fncod}}">{{fndsc}}</td>
+                <td>{{fnest}}</td>
+                <td>{{fntyp}}</td>
 
                 <td>
                     <a href="index.php?page=mnt_funcion&mode=UPD&id={{fncod}}">Editar</a>

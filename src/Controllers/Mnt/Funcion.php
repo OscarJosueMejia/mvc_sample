@@ -1,228 +1,223 @@
 <?php 
-    /**Created by FileGenerator 1.0*/
-    /**CRUD CONTROLLER*/
+namespace Controllers\Mnt;
 
-    namespace Controllers\Mnt;
-
-    use Controllers\PublicController;
-    use Views\Renderer;
-    use Utilities\Validators;
-    use Dao\Mnt\Funciones;
+use Controllers\PublicController;
+use Views\Renderer;
+use Utilities\Validators;
+use Dao\Mnt\Funciones;
 
 
-    class Funcion extends PublicController{
+class Funcion extends PublicController{
 
-        private $viewData = array();
-        private $arrModeDesc = array();
-    
-            private $arr_fnest = array();
-            
-            private $arr_fntyp = array();
-            
- 
-        public function run():void
-        {
-            $this->init();
+    private $viewData = array();
+    private $arrModeDesc = array();
 
-            if (!$this->isPostBack()) {
-                $this->procesarGet();
-            }
-            
-            if ($this->isPostBack()) {
-                $this->procesarPost();
-            }
-
-        $this->processView();
-        Renderer::render("mnt/funcion", $this->viewData);
-    }
-        private function init(){
-            $this->viewData = array();
-            $this->viewData["mode"] = "";
-            $this->viewData["mode_desc"] = "";
-            $this->viewData["crsf_token"] = "";
-
-            //Var set guided by Table Info
-    		$this->viewData["fncod"] = "";
-			$this->viewData["fndsc"] = "";
-			$this->viewData["error_fndsc"] = array();
-			$this->viewData["fnest"] = "";
-			$this->viewData["fnestArr"] = array();
-			$this->viewData["fntyp"] = "";
-			$this->viewData["fntypArr"] = array();
-	       
-            // ------
-            
-            $this->viewData["btnEnviarText"] = "Guardar";
-            $this->viewData["readonly"] = false;
-            $this->viewData["showBtn"] = true;
-
-            $this->arrModeDesc = array(
-                "INS"=>"Nuevo Funcion",
-                "UPD"=>"Editando %s %s",
-                "DSP"=>"Detalle de %s %s",
-                "DEL"=>"Eliminando %s %s"
-            );
-
-            // Array Options, Change this asap.
-            
-            $this->arr_fnest = array(
-                array("value" => "VAL1", "text" => "Text1"),
-                array("value" => "VAL2", "text" => "Text2"),
-                array("value" => "VAL3", "text" => "Text3"),
-            );
-            $this->viewData["fnestArr"] = $this->arr_fnest;
-            
-
-            $this->arr_fntyp = array(
-                array("value" => "VAL1", "text" => "Text1"),
-                array("value" => "VAL2", "text" => "Text2"),
-                array("value" => "VAL3", "text" => "Text3"),
-            );
-            $this->viewData["fntypArr"] = $this->arr_fntyp;
-            
-
-
-        }
-    
-        private function procesarGet(){
-            if (isset($_GET["mode"])) {
-                $this->viewData["mode"] = $_GET["mode"];
-                if (!isset($this->arrModeDesc[$this->viewData["mode"]])) {
-                    error_log("Error: El modo solicitado no existe.");
-                    \Utilities\Site::redirectToWithMsg(
-                        "index.php?page=mnt_funciones",
-                        "No se puede procesar su solicitud!"
-                    );
-                }
-            }
-            if ($this->viewData["mode"] !== "INS" && isset($_GET["id"])) {
-                $this->viewData["fncod"] = $_GET["id"];
-                $tmpArray = Funciones::getById($this->viewData["fncod"]);
-                \Utilities\ArrUtils::mergeFullArrayTo($tmpArray, $this->viewData);
-            }
-        }
-        private function procesarPost()
-        {
-            $hasErrors = false;
-            \Utilities\ArrUtils::mergeArrayTo($_POST, $this->viewData);
-            if (isset($_SESSION[$this->name . "crsf_token"])
-                && $_SESSION[$this->name . "crsf_token"] !== $this->viewData["crsf_token"]
-            ) {
-                \Utilities\Site::redirectToWithMsg(
-                    "index.php?page=mnt_funciones",
-                    "ERROR: Algo inesperado sucedió con la petición. Intente de nuevo."
-                );
-            }
-
-            //Validation Zone
+        private $arr_fnest = array();
+        
+        private $arr_fntyp = array();
         
 
-            if (Validators::IsEmpty($this->viewData["fndsc"])) {
-                $this->viewData["error_fndsc"][]
-                    = "Este campo es requerido.";
-                $hasErrors = true;
-            }  
-                    
-            //------
-            
-            if (!$hasErrors) {
-                $result = null;
+    public function run():void
+    {
+        $this->init();
 
-                switch($this->viewData["mode"]) {
-                case "INS":
-                    $result = Funciones::insert(
-                        $this->viewData["fndsc"],
-						$this->viewData["fnest"],
-						$this->viewData["fntyp"],
-						
-                    );
+        if (!$this->isPostBack()) {
+            $this->procesarGet();
+        }
+        
+        if ($this->isPostBack()) {
+            $this->procesarPost();
+        }
 
-                    if ($result) {
-                            \Utilities\Site::redirectToWithMsg(
-                                "index.php?page=mnt_funciones",
-                                "Registro Guardado Satisfactoriamente!"
-                            );
-                    }
-                    break;
+    $this->processView();
+    Renderer::render("mnt/funcion", $this->viewData);
+}
+    private function init(){
+        $this->viewData = array();
+        $this->viewData["mode"] = "";
+        $this->viewData["mode_desc"] = "";
+        $this->viewData["crsf_token"] = "";
 
-                case "UPD":
-                    $result = Funciones::update(
-                        $this->viewData["fndsc"],
-						$this->viewData["fnest"],
-						$this->viewData["fntyp"],
-						
-                        $this->viewData["fncod"]
-                    );
+        //Var set guided by Table Info
+        $this->viewData["fncod"] = "";
+        $this->viewData["error_fncod"] = array();
+        $this->viewData["fndsc"] = "";
+        $this->viewData["error_fndsc"] = array();
+        $this->viewData["fnest"] = "";
+        $this->viewData["fnestArr"] = array();
+        $this->viewData["fntyp"] = "";
+        $this->viewData["fntypArr"] = array();
+        // ------
+        
+        $this->viewData["btnEnviarText"] = "Guardar";
+        $this->viewData["readonly"] = false;
+        $this->viewData["showBtn"] = true;
 
-                    if ($result) {
-                        \Utilities\Site::redirectToWithMsg(
-                            "index.php?page=mnt_funciones",
-                            "Registro Actualizado Satisfactoriamente!"
-                        );
-                    }
-                    break;
+        $this->arrModeDesc = array(
+            "INS"=>"Nuevo Funcion",
+            "UPD"=>"Editando %s %s",
+            "DSP"=>"Detalle de %s %s",
+            "DEL"=>"Eliminando %s %s"
+        );
 
-                case "DEL":
-                    $result = Funciones::delete(
-                        $this->viewData["fncod"]
-                    );
+        $this->arr_fnest = array(
+            array("value" => "ACT", "text" => "Activo"),
+            array("value" => "INA", "text" => "Inactivo"),
+        );
 
-                    if ($result) {
-                        \Utilities\Site::redirectToWithMsg(
-                            "index.php?page=mnt_funciones",
-                            "Registro Eliminado Satisfactoriamente!"
-                        );
-                    }
-                    break;
-                }
+        $this->viewData["fnestArr"] = $this->arr_fnest;
+        
+        $this->arr_fntyp = array(
+            array("value" => "CTR", "text" => "Controlador"),
+            array("value" => "VIE", "text" => "Vista"),
+        );
+
+        $this->viewData["fntypArr"] = $this->arr_fntyp;
+    }
+
+    private function procesarGet(){
+        if (isset($_GET["mode"])) {
+            $this->viewData["mode"] = $_GET["mode"];
+            if (!isset($this->arrModeDesc[$this->viewData["mode"]])) {
+                error_log("Error: El modo solicitado no existe.");
+                \Utilities\Site::redirectToWithMsg(
+                    "index.php?page=mnt_funciones",
+                    "No se puede procesar su solicitud!"
+                );
             }
         }
-        private function processView(){
-            
-            if ($this->viewData["mode"] === "INS") {
-                $this->viewData["mode_desc"]  = $this->arrModeDesc["INS"];
-                $this->viewData["btnEnviarText"] = "Guardar Nuevo";
-            } else {
-                $this->viewData["mode_desc"]  = sprintf(
-                    $this->arrModeDesc[$this->viewData["mode"]],
+
+        if ($this->viewData["mode"] !== "INS" && isset($_GET["id"])) {
+            $this->viewData["fncod"] = $_GET["id"];
+            $tmpArray = Funciones::getById($this->viewData["fncod"]);
+            \Utilities\ArrUtils::mergeFullArrayTo($tmpArray, $this->viewData);
+        }
+    }
+
+    private function procesarPost()
+    {
+        $hasErrors = false;
+        \Utilities\ArrUtils::mergeArrayTo($_POST, $this->viewData);
+        if (isset($_SESSION[$this->name . "crsf_token"])
+            && $_SESSION[$this->name . "crsf_token"] !== $this->viewData["crsf_token"]
+        ) {
+            \Utilities\Site::redirectToWithMsg(
+                "index.php?page=mnt_funciones",
+                "ERROR: Algo inesperado sucedió con la petición. Intente de nuevo."
+            );
+        }
+
+        //Validation Zone
+        if (Validators::IsEmpty($this->viewData["fncod"])) {
+            $this->viewData["error_fncod"][]
+                = "Este campo es requerido.";
+            $hasErrors = true;
+        }  
+                
+        if (Validators::IsEmpty($this->viewData["fndsc"])) {
+            $this->viewData["error_fndsc"][]
+                = "Este campo es requerido.";
+            $hasErrors = true;
+        }  
+        //------
+        
+        if (!$hasErrors) {
+            $result = null;
+
+            switch($this->viewData["mode"]) {
+            case "INS":
+                $result = Funciones::insert(
                     $this->viewData["fncod"],
-                    "Cambie este valor por uno más descriptivo-Linea:171"
-                    // $this->viewData["descriptive_value_here"]
+                    $this->viewData["fndsc"],
+                    $this->viewData["fnest"],
+                    $this->viewData["fntyp"],
                 );
 
-                
-            $this->viewData["fnestArr"]
-                = \Utilities\ArrUtils::objectArrToOptionsArray(
-                    $this->arr_fnest,
-                    "value",
-                    "text",
-                    "value",
-                    $this->viewData["fnest"]
-                );            
-            
-            $this->viewData["fntypArr"]
-                = \Utilities\ArrUtils::objectArrToOptionsArray(
-                    $this->arr_fntyp,
-                    "value",
-                    "text",
-                    "value",
-                    $this->viewData["fntyp"]
-                );            
-            
+                if ($result) {
+                    \Utilities\Site::redirectToWithMsg(
+                        "index.php?page=mnt_funciones",
+                        "Función Guardada Satisfactoriamente!"
+                    );
+                }
+                break;
 
-                if ($this->viewData["mode"] === "DSP") {
-                    $this->viewData["readonly"] = true;
-                    $this->viewData["showBtn"] = false;
+            case "UPD":
+                $result = Funciones::update(
+                    $this->viewData["fndsc"],
+                    $this->viewData["fnest"],
+                    $this->viewData["fntyp"],
+                    $this->viewData["fncod"]
+                );
+
+                if ($result) {
+                    \Utilities\Site::redirectToWithMsg(
+                        "index.php?page=mnt_funciones",
+                        "Función Actualizada Satisfactoriamente!"
+                    );
                 }
-                if ($this->viewData["mode"] === "DEL") {
-                    $this->viewData["readonly"] = true;
-                    $this->viewData["btnEnviarText"] = "Eliminar";
+                break;
+
+            case "DEL":
+                $result = Funciones::delete(
+                    $this->viewData["fncod"]
+                );
+
+                if ($result) {
+                    \Utilities\Site::redirectToWithMsg(
+                        "index.php?page=mnt_funciones",
+                        "Función Eliminada Satisfactoriamente!"
+                    );
                 }
-                if ($this->viewData["mode"] === "UPD") {
-                    $this->viewData["btnEnviarText"] = "Actualizar";
-                }
+                break;
             }
-            $this->viewData["crsf_token"] = md5(getdate()[0] . $this->name);
-            $_SESSION[$this->name . "crsf_token"] = $this->viewData["crsf_token"];
         }
-    }?>
+    }
+
+
+    private function processView(){
+        
+        if ($this->viewData["mode"] === "INS") {
+            $this->viewData["mode_desc"]  = $this->arrModeDesc["INS"];
+            $this->viewData["btnEnviarText"] = "Guardar Nuevo";
+        } else {
+            $this->viewData["mode_desc"]  = sprintf(
+                $this->arrModeDesc[$this->viewData["mode"]],
+                $this->viewData["fncod"],
+                $this->viewData["fndsc"],
+            );
+            
+        $this->viewData["fnestArr"]
+            = \Utilities\ArrUtils::objectArrToOptionsArray(
+                $this->arr_fnest,
+                "value",
+                "text",
+                "value",
+                $this->viewData["fnest"]
+            );            
+        
+        $this->viewData["fntypArr"]
+            = \Utilities\ArrUtils::objectArrToOptionsArray(
+                $this->arr_fntyp,
+                "value",
+                "text",
+                "value",
+                $this->viewData["fntyp"]
+            );            
+        
+
+            if ($this->viewData["mode"] === "DSP") {
+                $this->viewData["readonly"] = true;
+                $this->viewData["showBtn"] = false;
+            }
+            if ($this->viewData["mode"] === "DEL") {
+                $this->viewData["readonly"] = true;
+                $this->viewData["btnEnviarText"] = "Eliminar";
+            }
+            if ($this->viewData["mode"] === "UPD") {
+                $this->viewData["btnEnviarText"] = "Actualizar";
+            }
+        }
+        $this->viewData["crsf_token"] = md5(getdate()[0] . $this->name);
+        $_SESSION[$this->name . "crsf_token"] = $this->viewData["crsf_token"];
+    }
+}?>
