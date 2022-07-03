@@ -38,6 +38,8 @@
         <li><a href="index.php?page=Mnt_Catalogo"><i class="fas fa-user-plus"></i>&nbsp;Catálogo</a></li>
         <li><a href="index.php?page=Mnt_Roles"><i class="fas fa-user-plus"></i>&nbsp;Roles</a></li>
         <li><a href="index.php?page=Mnt_Funciones"><i class="fas fa-user-plus"></i>&nbsp;Funciones</a></li>
+        <li><a href="index.php?page=Mnt_Usuarios"><i class="fas fa-user-plus"></i>&nbsp;Usuarios</a></li>
+
       </ul>
     </nav>
   </header>

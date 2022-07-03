@@ -1,54 +1,50 @@
 <?php
-
-namespace Controllers\Mnt;
-
-use Controllers\PrivateController;
-
-class Usuarios extends PrivateController{
-    public function run():void
-    {
-        $viewData = array();
-        $viewData["Usuarios"] = \Dao\Security\Security::getUsuarios();
-        $viewData["CanInsert"] = self::isFeatureAutorized("Controllers\Mnt\Usuario\New");
-        $viewData["CanUpdate"] = self::isFeatureAutorized("Controllers\Mnt\Usuario\Upd");
-        $viewData["CanDelete"] = self::isFeatureAutorized("Controllers\Mnt\Usuario\Del");
-        $viewData["CanView"] = self::isFeatureAutorized("Controllers\Mnt\Usuario\Dsp");
-
-        \Views\Renderer::render("mnt/usuarios", $viewData);
-    }
-}
-
-/*
-{
-    Usuarios: [],
-    CanInsert: true,
-    CanUpdate: true,
-    CanDelete: true,
-    CanView: true
-}
-
-withContext =
-root =
-{
-    Usuarios: [],
-    CanInsert: true,
-    CanUpdate: true,
-    CanDelete: true,
-    CanView: true
-}
-
-foreach Usuarios
-    withContext = Usuarios
-    
-    root =
-        {
-            Usuarios: [],
-            CanInsert: true,
-            CanUpdate: true,
-            CanDelete: true,
-            CanView: true
-        }
-endfor Usuarios
-*/
-
-?>
+      /**
+       * PHP Version 7.2
+       * Mnt
+       *
+       * @category Controller
+       * @package  Controllers\Mnt
+       * @author   
+       * @license  Comercial http://
+       * @version  CVS:1.0.0
+       * @link     http://url.com
+       */
+       namespace Controllers\Mnt;
+      
+      // ---------------------------------------------------------------
+      // Sección de imports
+      // ---------------------------------------------------------------
+      use Controllers\PublicController;
+      use Dao\Security\Security as DaoSecurity;
+      use Views\Renderer;
+      
+      /**
+       * Usuarios
+       *
+       * @category Public
+       * @package  Controllers\Mnt;
+       * @author   
+       * @license  MIT http://
+       * @link     http://
+       */
+      class Usuarios extends PublicController
+      {
+          /**
+           * Runs the controller
+           *
+           * @return void
+           */
+          public function run():void
+          {
+              // code
+              $viewData = array();
+              $viewData["Usuarios"] = DaoSecurity::getUsuarios();
+              error_log(json_encode($viewData));
+            
+              Renderer::render("mnt/Usuarios", $viewData);
+          }
+      }
+      
+      ?>
+      
