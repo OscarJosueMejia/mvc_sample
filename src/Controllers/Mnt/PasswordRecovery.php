@@ -1,5 +1,9 @@
 <?php
+
+
 namespace Controllers\Mnt;
+
+
 class PasswordRecovery extends \Controllers\PublicController
 {
     private $txtEmail = "";
@@ -27,8 +31,9 @@ class PasswordRecovery extends \Controllers\PublicController
                 if (! $this->hasError) {
                     if ($dbUser = \Dao\Security\Security::getUsuarioByEmail($this->txtEmail)) {
                         
-                        if ($dbUser["userest"] != \Dao\Security\Estados::ACTIVO) {
+                        if ($dbUser["userest"] != \Dao\Security\Estados::BLOQUEADO && $dbUser["userest"] != \Dao\Security\Estados::ACTIVO ) {
                             $this->generalError = "¡Credenciales son incorrectas!";
+                            $this->intStep == 0;
                             $this->hasError = true;
                             error_log(
                                 sprintf(
@@ -42,8 +47,8 @@ class PasswordRecovery extends \Controllers\PublicController
     
                         if (! $this->hasError) {
                             try {
-                                $tempPass = "pas$2001?S";
-                                // $tempPass = "pas$2001?S$";
+                                $tempPass = \Dao\Security\Security::randomPassword(8);
+                                
                                 \Dao\Security\Security::updateUsuario(
                                     $this->txtEmail,
                                     $dbUser["username"],
@@ -51,7 +56,11 @@ class PasswordRecovery extends \Controllers\PublicController
                                     \Dao\Security\Estados::BLOQUEADO,
                                     $dbUser["usertipo"],
                                 );
-                                // mail($dbUser["userest"], "Recuperación Contraseña", "Su contraseña Temporal es: 1243541"); 
+
+                                if (!\Utilities\EmailSender::sendMail($dbUser["useremail"], $tempPass)) {
+                                    $this->generalError = "Error al Enviar el Correo de Recuperación";
+                                    $this->intStep == 0;
+                                }
                             } catch (\Throwable $th) {
                                 echo "<br><br><br><br>";
                                 echo $th;
@@ -148,4 +157,7 @@ class PasswordRecovery extends \Controllers\PublicController
 
     }
 }
+
+
+
 ?>

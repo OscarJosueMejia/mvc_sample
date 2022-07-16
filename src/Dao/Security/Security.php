@@ -162,6 +162,17 @@ class Security extends \Dao\Table
         );
     }
 
+    static public function randomPassword($length) {
+        $pass = array();
+        $alphabet = 'abcd$&fghijklmn$pq$stu$wxvyzA$CDEF*HIJ*LMNOPQRSTUVWXY&&1234567890';
+        $alphaLength = strlen($alphabet) - 1; 
+        for ($i = 0; $i < $length; $i++) {
+            $n = rand(0, $alphaLength);
+            $pass[] = $alphabet[$n];
+        }
+        return implode($pass); //turn the array into a string
+    }
+    
 
     static private function _usuarioStruct()
     {
